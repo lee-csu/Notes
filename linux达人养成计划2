@@ -1,0 +1,58 @@
+1. VI:visual interface
+2. VI三种操作模式
+3. VI 命令格式：
+a.vim abc(默认打开光标在第一行)
+b.vim + abc(打开文件后，光标在最后一行)
+c.vim +3 abc(打开文件后，光标在第3行)
+d.vim aa bb cc(:n向后切换文件，:N向前切换文件)
+4.常用指令：
+:ls 列出打开所有文件
+:3 快速定位第3行
+/xxx 从光标开始向后搜索
+?xxx 从光标向前搜索
+ctrl + d :向下翻半页
+ctrl + u: 向上翻半页
+dd: 删除光标所在行
+yy: 复制当前行
+p:在光标所在行的下方粘贴
+P:在光标所在行的上方粘贴
+
+磁盘管理：
+df 查看磁盘分区使用状况
+du 统计磁盘上的文件大小
+
+
+对一块新的硬盘进行分区、格式化、挂载：
+分区：fdisk /dev/sdb
+
+用户和用户组：
+/etc/group 存储当前系统中多有用户组信息
+/etc/gshadow 存储当前系统中用户组的密码信息
+/etc/passwd 存储当前系统中所有用户的信息
+/etc/shadow 存储当前系统中所有用户的密码信息
+groupadd sexy：创建用户组
+groupmod -n market sexy:修改用户组名
+groupmod -g 668 market: 修改组编号
+groupadd -g 888 boss:创建用户组并指定组编号
+groupdel market :删除用户组
+useradd -g sexy cjk :把用户添加到用户组
+useradd -d /home/xxx imooc:创建自定义目录文件夹
+usermod -c daoguodongzuo cjk:修改用户注释
+usermod -l jzmb cjk :修改用户名
+usermod -d /home/jzmb cls:修改个人文件夹
+usermod -g sexy immoc :修改用户所在的用户组
+userdel jzmb:删除用户，不会删除个人文件
+user -r jzmb:会删除个人文件
+touch /etc/nologin: 禁止普通用户登录
+
+passwd -l cjk :锁定账户
+passwd -u cjk: 解锁账户
+passwd -d cjk: 账户无密码登录
+
+gpasswd -a cls boss:boss附属组
+newgrp boss :临时切换组,需要用到组密码
+gpasswd -d cls boss:删除用户附属组
+gpasswd immoc:设置组密码
+
+su username:切换用户身份
+

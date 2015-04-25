@@ -1,0 +1,65 @@
+happycasts网站
+1.ctrl + L 清屏幕
+
+linux文件系统挂载点：文件夹和分区之间的对应
+
+常用命令：
+cp： cp file1 file2 
+     cp -r dir1 dir2
+
+mv: mv file ..
+    mv file1 file2 
+    mv dir1 dir2  #dir2存在，则为移动操作
+
+rm：rm file
+    rm -r dir
+
+查看文件类型：file命令
+查看文件：cat,less
+
+通配符：*
+解压压缩命令：unzip file.zip
+            zip -r final.zip origin
+            tar -zxvf file.tar.gz
+            tar -zcvf final.tar.gz origin
+            tar -jxvf file.tar.bz2
+            tar -jcvf final.tar.bz2 origin
+
+三个重要文件：stdin(文件描述符0),stdout（1）,stderr（2）
+重定向方式：>, >>(追加) 标准错误重定向:2>  标准输入：<   
+uniq:去除重复文件
+
+权限分类：r,w,x   
+对于目录有写权限，意味着可以对目录里的文件进行删除、新建、重命名操作
+对于目录有执行权限，意味着可以切换到该目录，否则不行
+
+PID：ps aux|less   kill PID ,ctrl+shift+c为复制，ctrl+shift+V为粘贴
+后台执行： firefox &   ctrl+z暂停进程，bg为后台运行，fg回到前台运行，ctrl+c结束进程
+         kill -9 uid程序崩溃时强制推出,桌面系统被托死时，ctrl+alt+f1切换工作台
+
+查找：locate 搜索文件系统， find查找目录:find . -type f;find . -type d
+     find .-type f -exec  命令  ‘{}’ ';'ack命令
+
+网络操作：
+ssh： ssh lee@happycasts.net 
+      tmux 工具使用，保存现场
+rsync: rsync -r mydir happycasts.net: (上传文件夹)
+       rsync -r happycasts.net:mydir .(下载)
+       rsync -av --delete mydir/ happycasts.net:mydir/(本地本机更改，删除，同步上传方法)
+
+安装软件：
+手动安装：echo $PATH ; ln -s ~/.sublime/sublime_text ~/bin/subl
+源码安装：1. ./configure  2. make  3.sudo make install 
+deb包：sudo dpkg -i google-chrome.deb (包安装) 
+apt-get:apt-get install git;自动处理依赖问题;apt-get purge git(删除软件)
+
+
+脚本编程：
+1.指定解析器
+2.语句即命令
+3.符号参数，$0 $1 $2 $#
+4.脚本不再当前shell执行（source+脚本：在当前shell执行）
+5.循环控制
+6.远程执行：ssh -t 
+7.确认执行
+8.用其他语言写脚本
