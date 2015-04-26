@@ -21,6 +21,24 @@ P:在光标所在行的上方粘贴
 df 查看磁盘分区使用状况
 du 统计磁盘上的文件大小
 
+分区模式-MBR：
+a.主分区不超过4个
+b.单个分区容量最大2TB
+
+分区模式-GPT：
+a.主分区个数“几乎”没有限制
+b.单个分区容量“几乎”没有限制
+c.缺点：不适合安装X86架构的系统（32位操作系统）
+
+分区命令：parted
+
+格式化：mkfs
+eg.mkfs -t ext4 /dev/sdb2
+
+挂载分区：默认挂载目录/mnt
+mount /dev/sdb1 /mnt/imooc
+umount /mnt/imooc
+配置文件 /dev/fstab
 
 对一块新的硬盘进行分区、格式化、挂载：
 分区：fdisk /dev/sdb
