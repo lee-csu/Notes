@@ -1,0 +1,24 @@
+参考网址：www.mintos.org/config/mint-qiana-config.html
+
+系统版本：Linux Mint 17中文版
+搜狗输入法来源:官方提供的deb包
+
+安装过程：
+1.首先安装缺少的中文包,命令如下：
+sudo apt-get install language-pack-zh-hans language-pack-gnome-zh-hans libreoffice-l10n-zh-cn thunderbird-locale-zh-hans firefox-locale-zh-hans
+之后重启系统
+
+2.安装Fcitx（搜狗输入法需要Fcitx框架），命令如下：
+sudo apt-get install fcitx fcitx-table-wubi-large fcitx-frontend-all fcitx-frontend-gtk2 fcitx-frontend-gtk3 fcitx-frontend-qt4 fcitx-config-gtk fcitx-ui-classic fcitx-module-kimpanel fcitx-module-dbus libopencc1 fcitx-libs-qt
+之后重启系统
+
+3.从官网下载搜狗输入法的deb包，并安装，命令如下：
+wget http://pinyin.sogou.com/linux/download.php?f=linux&bit=32
+dpkg -i sogou*.deb
+
+4.通过输入法配置器（用im-config打开）设置输入法为fcitx
+
+5.重启系统之后就可以看到搜狗输入法了（请务必重启，否则看不到搜狗输入法）
+
+
+ps：昨天安装输入法折腾了好久，终于在晚上搞定，特地记录下来。最大的一个感想就是：如果你想要在你的linux系统中使用中文，请务必安装中文版的系统，否则就真的“never input Chinese on linux”了.
