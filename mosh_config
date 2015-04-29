@@ -1,0 +1,27 @@
+买了一台国外的VPS，使用ssh登陆之后就惊呆了，延迟略大，实在不爽，于是寻找各种解决方案，突然柳暗花明---mosh
+
+服务器端（VPS）系统版本：Ubuntu 14.04
+客户端系统版本：Linux Mint 17
+
+配置过程：
+1.在服务器端和客户端均需要安装mosh，服务器端安装命令：
+sudo apt-get intall python-software-properties
+sudo add-apt-repository ppa:keithw/mosh
+sudo apt-get update
+sudo apt-get install mosh
+客户端安装命令：
+sudo apt-get intall python-software-properties
+sudo add-apt-repository ppa:keithw/mosh
+sudo apt-get update
+sudo apt-get install mosh
+因为Linux Mint是基于Ubuntu，所以这里二者安装命令相同
+
+2.配置语言环境，因为mosh需要客户端和服务器具有相同的UTF-8编码方式，使用locale命令查看客户端和服务器端的语言环境，这里给出一种配置en_US.UTF-8的方式：
+locale-gen en_US.UTF-8   //激活en_US.UTF-8
+vim /etc/profile         //编辑配置文件
+添加内容：export LC_ALL=en_US.UTF-8
+source /etc/profile      //执行配置文件中的命令
+dpkg-reconfigure locales //重新配置locales
+
+之后就可以开心的使用mosh了
+ps:使用mosh之后，速度明显快了很多，除了在Windows下无法使用mosh之外，似乎没有什么理由再去使用ssh了
