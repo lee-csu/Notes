@@ -1,0 +1,38 @@
+4月份买了台VPS，并通过chrome浏览器的设置成功实现科学上网，但手头的ipad却没办法上外网，于是一时兴起，准备搭建一台VPN，供移动设备使用。
+
+搭建环境：基于OpenVZ的VPS，系统为Ubuntu 12.04 LTS
+配置准备：在VPS后台开启PPP支持和Tun/Tap支持（pptpd的必要选择）
+
+配置步骤：(注：使用的是root账户登录，所以命令前没有加sudo)
+1.安装pptpd，命令为：apt-get install pptpd 
+2.配置DNS服务器：
+a.vi /etc/ppp/pptpd-options
+b.在文件中添加谷歌DNS或OpenDNS，即：
+ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+或者
+208.67.222.222
+208.67.220.220
+3.配置pptpd：
+a.vi /etc/pptpd.conf
+b.在文件中添加：
+localip <vps-ip>
+remoteip 10.0.0.100-199  
+其中<vps-ip>使用自己的vps ip代替，remoteip可以随意指定一段IP地址
+4.添加VPN账户和密码：
+a.vi /etc/ppp/chap-secrets
+b.在文件中添加：
+<user> pptpd <password> *
+其中<user>使用自己定义的用户名代替，<password>则使用自己想要设定的密码代替
+5.配置网络（连入VPN的主机将如何访问网络）
+a.vi /etc/sysctl.conf
+b.在文件中将“#net.ipv4.ip_forward=1”那一行取消注释
+c.重新加载配置文件，命令为：sysctl -p
+6.配置防火墙：
+a.iptables -P FORWARD ACCEPT
+b.iptables --table nat -A POSTROUTING -o venet0 -j MASQUERADE
+
+此时使用配置好的用户名和密码就可以登录VPN了，登录之后如果发现速度太慢，可以修改MTU（或MSS），命令为：
+iptables -A FORWARD -p tcp --syn -s 10.0.0.0/24 -j TCPMSS --set-mss 1356
+
+到此，VPN配置结束
